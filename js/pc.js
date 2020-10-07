@@ -44,12 +44,27 @@ function pc (data) {
   /** Computer Exercise starts here  */
 
   // Task 5.0.8 -- Drawing the Lines
-  var foreground
+  var foreground = pc_svg.append('g').selectAll('path').data(data).enter().append('path').attr('d', drawPath)
+  pc_svg.selectAll('path').style('fill', 'transparent').style('stroke', 'darkturquoise').style('opacity', '0.3')
+
+  // var myCircles = sp_svg.append('g').selectAll('circle').data(data).enter().append('circle').enter().attr('cx', function (d) { return xScale(d.Skattesats) })
 
   // Task 5.0.9 -- Drawing Axes
-  var axes
+  // var axes = d3.scaleLinear()
+  //   .domain([d3.min(xVarValues), d3.max(xVarValues)])
+  //   .range([0, width])
+  // var axes = pc_svg.selectAll('.dimension').data(dimensions).enter().append('g')
+  var axes = pc_svg.append('g').selectAll('.dimension').data(dimensions).enter().append('path')
 
   // 5.0.10 -- Appending Axes Titles
+
+  axes.each(label => d3.select(this).text(label))
+  // dimensions.forEach(dimension => {
+  //   console.log(dimension)
+  //   // .dimension(dimension).axis(yAxis)
+  //   pc_svg.selectAll('.dimension').data([dimension]).enter().append('g').text(dimension)
+  //   // pc_svg.selectAll('.dimension').data([dimension]).enter().append('circle').attr('cy', yAxis(dimension.Skattesats)).attr('r', 6).style('fill', 'darkturquoise').style('opacity', '0.3')
+  // })
 
   // 5.0.11 -- Interaction, brushing the axes
 
