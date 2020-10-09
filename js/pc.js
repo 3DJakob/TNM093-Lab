@@ -54,11 +54,27 @@ function pc (data) {
   //   .domain([d3.min(xVarValues), d3.max(xVarValues)])
   //   .range([0, width])
   // var axes = pc_svg.selectAll('.dimension').data(dimensions).enter().append('g')
-  var axes = pc_svg.append('g').selectAll('.dimension').data(dimensions).enter().append('path')
-
+  var axes = pc_svg.append('g').selectAll('.dimension').data(dimensions).enter().append('g')
+    .attr('class', 'dimension axis')
+    .attr('transform', function (d) {
+      console.log(position(d))
+      return 'translate(' + position(d) + ')'
+    })
   // 5.0.10 -- Appending Axes Titles
+    .text((title) => {
+      console.log(d3.select(this))
+      return title
+    })
 
-  axes.each(label => d3.select(this).text(label))
+  d3.selectAll('.dimension.axis').each((d) => { return d3.select(this).call(yAxis) })
+
+  // axes.each(label => d3.select(this).text('test'))
+  // axes.each(label => d3.select(this).text(function (d, i) {
+  //   return 'child are edited.'
+  // }))
+
+  // axes.selectAll('path').each(path => console.log(path))
+
   // dimensions.forEach(dimension => {
   //   console.log(dimension)
   //   // .dimension(dimension).axis(yAxis)
