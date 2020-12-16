@@ -42,6 +42,12 @@ function info (data) {
     .data(data)
     .enter()
     .append('tr')
+    .on('mouseenter', (e) => {
+      selectValues({value: e.Region})
+    })
+    .on('mouseleave', (e) => {
+      resetSelectedValues()
+    })
 
 
   // create a cell in each row for each column
@@ -54,15 +60,15 @@ function info (data) {
     .enter()
     .append('td')
     .text(function (d) { return d.value })
-    .on('mouseenter', (e) => {
-      console.log(e)
-      const data = {value: e.Region}
-      selectValues(e)
-    })
-    .on('mouseleave', (e) => {
-      console.log('foooobar2')
-      resetSelectedValues(e)
-    })
+    // .on('mouseenter', (e) => {
+    //   console.log(e)
+    //   const data = {value: e.Region}
+    //   selectValues(e)
+    // })
+    // .on('mouseleave', (e) => {
+    //   console.log('foooobar2')
+    //   resetSelectedValues(e)
+    // })
   /**
 		*  Final Task -- call the two function below.
 		*/
