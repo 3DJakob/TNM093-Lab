@@ -49,7 +49,7 @@ function pc (data) {
 
   // Task 5.0.9 -- Drawing Axes
 
-  var axes = pc_svg.selectAll('.dimension').data(dimensions).enter().append('g')
+  const axes = pc_svg.selectAll('.dimension').data(dimensions).enter().append('g')
     .attr('class', 'dimension axis')
     .attr('transform', function (d) {
       return 'translate(' + position(d) + ' ' + (0) + ')'
@@ -65,7 +65,7 @@ function pc (data) {
     })
 
   // 5.0.10 -- Appending Axes Titles
-  var axesTitles = axes.append('text')
+  const axesTitles = axes.append('text')
     .attr('class', 'dimension axis')
     .attr('text-anchor', 'middle')
     .attr('transform', function (d) {
@@ -74,8 +74,31 @@ function pc (data) {
 
 
   // 5.0.11 -- Interaction, brushing the axes
+  const brushStrokes = axes.append('g')
+    .attr('class', 'brush')
+    .each(function (d) {
+      d3.select(this).call(perAxisBrush(d))
+    })
+
+  axes.selectAll('rect')
+    .attr('x', -8)
+    .attr('width', 10)
 
   // 5.0.12 -- Interaction, dragging the Axes
+
+  // d3.drag().subject(axes)
+  axes.call(d3.drag()
+    .subject((d) => {return {x: x(d)}})
+    .on('start', (e) => {
+      console.log('fooo')
+    })
+    .on('drag', (e) => {
+      console.log('drag')
+    })
+    .on('end', (e) => {
+      console.log('ffffff')
+    })
+  )
 
   /** Computer Exercise ends here  */
 

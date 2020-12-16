@@ -57,7 +57,6 @@ function sp (data) {
 
   // Task 5.0.3  -- Create y-axis
   const yVarValues = data.map(obj => Number(obj[y_var]))
-  console.log(yVarValues)
 
   var yScale = d3.scaleLinear()
     .domain([d3.max(yVarValues), d3.min(yVarValues)])
@@ -71,7 +70,6 @@ function sp (data) {
   sp_svg.append('g').call(y_axis).attr('transform', 'translate(0,' + 0 + ')')
 
   // Task 5.0.5 -- Append circles to sp_svg
-  console.log(yVarValues) // skattesats
   const parent = sp_svg.append('g').selectAll('circle')
   data.forEach(element => {
     parent.data([element]).enter().append('circle').attr('cy', yScale(element.Skattesats)).attr('cx', xScale(element.Medelålder))
@@ -82,13 +80,7 @@ function sp (data) {
   // Task 5.0.6 -- Add attributes to the circles
   sp_svg.selectAll('circle').attr('r', 6).style('fill', 'darkturquoise').style('opacity', '0.3')
   // Task 5.0.7 -- Call hovering function here
-
-  // sp_svg.selectAll('circle').on('mouseover', (e) => {
-  //   console.log('hovering!')
-  // })
   hovering()
-
-  console.log(sp_svg.selectAll('circle')._parents)
 
   /** NECESSARY FUNCTION. DO NOT TOUCH */
 
@@ -106,7 +98,6 @@ function sp (data) {
 
   function hovering () {
     sp_svg.selectAll('circle').on('mouseover', function (d) {
-      console.log('ffoooo')
       focusCricle(d.Region)
       pc.selectLine(d.Region)
       tooltip
