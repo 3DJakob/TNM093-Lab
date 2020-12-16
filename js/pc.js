@@ -90,13 +90,13 @@ function pc (data) {
   axes.call(d3.drag()
     .subject((d) => {return {x: x(d)}})
     .on('start', (e) => {
-      console.log('fooo')
+      startDrag(e)
     })
     .on('drag', (e) => {
-      console.log('drag')
+      drag(e)
     })
     .on('end', (e) => {
-      console.log('ffffff')
+      endDrag(e)
     })
   )
 
