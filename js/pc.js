@@ -44,7 +44,7 @@ function pc (data) {
   /** Computer Exercise starts here  */
 
   // Task 5.0.8 -- Drawing the Lines
-  var foreground = pc_svg.append('g').selectAll('path').data(data).enter().append('path').attr('d', drawPath)
+  var foreground = pc_svg.append('g').attr('class', 'foreground').selectAll('path').data(data).enter().append('path').attr('d', drawPath)
   pc_svg.selectAll('path').style('fill', 'transparent').style('stroke', 'darkturquoise').style('opacity', '0.3')
 
   // Task 5.0.9 -- Drawing Axes
@@ -167,8 +167,10 @@ function pc (data) {
   }
 
   this.selectLine = function (value) {
+    console.log(value)
     d3.select('.foreground').selectAll('path')
       .style('stroke', function (d) {
+        console.log(d.Region)
         return d.Region == value ? 'deeppink' : 'darkturquoise'
       })
       .style('stroke-width', function (d) {

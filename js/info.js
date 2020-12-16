@@ -43,6 +43,7 @@ function info (data) {
     .enter()
     .append('tr')
 
+
   // create a cell in each row for each column
   var cells = rows.selectAll('td')
     .data(function (row) {
@@ -53,7 +54,15 @@ function info (data) {
     .enter()
     .append('td')
     .text(function (d) { return d.value })
-
+    .on('mouseenter', (e) => {
+      console.log(e)
+      const data = {value: e.Region}
+      selectValues(e)
+    })
+    .on('mouseleave', (e) => {
+      console.log('foooobar2')
+      resetSelectedValues(e)
+    })
   /**
 		*  Final Task -- call the two function below.
 		*/
